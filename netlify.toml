@@ -7,24 +7,3 @@
 
 [build.environment]
   NODE_VERSION = "20"
-
-# Redirect rules for client-side routing
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  force = false
-  conditions = {Role = ["admin"], Country = ["US"]}
-
-# Handle Next.js image optimization
-[[redirects]]
-  from = "/_next/image"
-  to = "/.netlify/functions/image"
-  status = 200
-  force = true
-
-# Handle API routes if you have any
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
