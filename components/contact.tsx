@@ -43,7 +43,7 @@ export default function Contact() {
             Contact Us
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Have questions or want to get involved? We'd love to hear from you.
+            Have questions or want to get involved? We&apos;d love to hear from you.
           </p>
         </motion.div>
 
@@ -133,7 +133,7 @@ export default function Contact() {
                   Send us a Message
                 </CardTitle>
                 <CardDescription>
-                  Fill out the form below and we'll respond as soon as possible
+                  Fill out the form below and we&apos;ll respond as soon as possible
                 </CardDescription>
               </CardHeader>
               <CardContent>

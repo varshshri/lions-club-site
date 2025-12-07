@@ -123,7 +123,7 @@ export default function Membership() {
                   Membership Application
                 </CardTitle>
                 <CardDescription className="text-white/80">
-                  Fill out the form below and we'll get back to you soon.
+                  Fill out the form below and we&apos;ll get back to you soon.
                 </CardDescription>
               </CardHeader>
               <CardContent>

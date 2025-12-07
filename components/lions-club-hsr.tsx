@@ -142,7 +142,7 @@ export default function LionsClubHSR() {
               Lions Club HSR Layout is your local chapter of Lions Clubs International. 
               We organize health camps, blood donation drives, eye donation awareness programs, 
               environmental initiatives, and support educational and community welfare activities. 
-              Together, we're building a stronger, more compassionate community in HSR Layout.
+              Together, we&apos;re building a stronger, more compassionate community in HSR Layout.
             </p>
             <p className="text-lg text-white/90 font-semibold">
               Join us in our mission to serve and make a lasting impact!

@@ -57,7 +57,7 @@ export default function Events() {
             Events
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Join us at our upcoming events and see what we've accomplished
+            Join us at our upcoming events and see what we&apos;ve accomplished
             together.
           </p>
         </motion.div>

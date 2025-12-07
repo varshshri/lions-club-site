@@ -45,7 +45,7 @@ export default function ClubIntroduction() {
             <p className="text-lg text-gray-600 mb-4 leading-relaxed">
               Lions Club Agara is a dedicated chapter of Lions Clubs International, committed to serving 
               the local community in Agara with passion, integrity, and unwavering dedication. We are 
-              part of the world's largest service club organization, bringing together volunteers who 
+              part of the world&apos;s largest service club organization, bringing together volunteers who 
               share a common goal: making a positive difference in our community.
             </p>
             <p className="text-lg text-gray-600 mb-4 leading-relaxed">

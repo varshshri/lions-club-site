@@ -26,7 +26,7 @@ export default function LionsInternational() {
             Lions International Club
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Part of the world's largest service club organization, serving communities globally since 1917
+            Part of the world&apos;s largest service club organization, serving communities globally since 1917
           </p>
         </motion.div>
 
@@ -106,7 +106,7 @@ export default function LionsInternational() {
             Join the Global Movement
           </h3>
           <p className="text-lg text-white/90 mb-6 max-w-2xl mx-auto">
-            Lions Clubs International is the world's largest service club organization. 
+            Lions Clubs International is the world&apos;s largest service club organization. 
             We empower volunteers to serve their communities, meet humanitarian needs, 
             encourage peace, and promote international understanding.
           </p>

@@ -45,7 +45,7 @@ export default function Gallery() {
             Gallery
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Take a look at our activities and the impact we're making in the
+            Take a look at our activities and the impact we&apos;re making in the
             community.
           </p>
         </motion.div>
