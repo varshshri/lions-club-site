@@ -1,26 +1,18 @@
 "use client";
 
 import Navbar from "@/components/navbar";
-import Hero from "@/components/hero";
-import About from "@/components/about";
-import Services from "@/components/services";
-import Events from "@/components/events";
-import Membership from "@/components/membership";
-import Gallery from "@/components/gallery";
-import Contact from "@/components/contact";
+import HeroHome from "@/components/hero-home";
+import FocusAreas from "@/components/focus-areas";
+import LocalClubSection from "@/components/local-club-section";
 import Footer from "@/components/footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-white">
       <Navbar />
-      <Hero />
-      <About />
-      <Services />
-      <Events />
-      <Membership />
-      <Gallery />
-      <Contact />
+      <HeroHome />
+      <FocusAreas />
+      <LocalClubSection />
       <Footer />
     </main>
   );

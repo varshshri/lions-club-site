@@ -3,22 +3,26 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { name: "Home", href: "#hero" },
-  { name: "About", href: "#about" },
-  { name: "Services", href: "#services" },
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Our Projects", href: "/services" },
+  { name: "SEVA TRUST", href: "/seva-trust" },
   { name: "Events", href: "#events" },
-  { name: "Membership", href: "#membership" },
-  { name: "Gallery", href: "#gallery" },
+  { name: "Join Us", href: "#join" },
   { name: "Contact", href: "#contact" },
 ];
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,9 +34,14 @@ export default function Navbar() {
 
   const handleNavClick = (href: string) => {
     setIsMobileMenuOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+    if (href.startsWith("/")) {
+      // Let Next.js Link handle routing
+      return;
+    } else if (href.startsWith("#")) {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
     }
   };
 
@@ -43,49 +52,77 @@ export default function Navbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled
-          ? "bg-primary/95 backdrop-blur-md shadow-lg"
-          : "bg-primary"
+          ? "bg-white/95 backdrop-blur-md shadow-lg"
+          : "bg-white"
       )}
     >
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="flex items-center space-x-2"
-          >
-            <div className="w-12 h-12 bg-secondary rounded-full flex items-center justify-center">
-              <span className="text-primary font-bold text-xl">L</span>
-            </div>
-            <span className="text-white font-bold text-xl font-poppins">
-              Lions Club
+          {/* Logo - Links to Home */}
+          <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="relative"
+            >
+              <Image
+                src="https://www.lionsclubs.org/static/media/logo.6b5c5c5e.svg"
+                alt="Lions International Logo"
+                width={50}
+                height={50}
+                className="w-12 h-12 object-contain"
+                priority
+              />
+            </motion.div>
+            <span className="text-[#1a1a1a] font-semibold text-lg tracking-tight" style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}>
+              Lions Club Agara
             </span>
-          </motion.div>
+          </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <button
-                key={item.name}
-                onClick={() => handleNavClick(item.href)}
-                className="text-white/90 hover:text-secondary transition-colors font-medium"
-              >
-                {item.name}
-              </button>
-            ))}
+          <div className="hidden md:flex items-center space-x-6">
+            {navItems.map((item) => {
+              if (item.href.startsWith("/")) {
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={cn(
+                      "transition-colors font-medium text-sm text-[#1a1a1a] hover:text-[#0066cc]",
+                      pathname === item.href
+                        ? "text-[#0066cc]"
+                        : ""
+                    )}
+                    style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              }
+              return (
+                <button
+                  key={item.name}
+                  onClick={() => handleNavClick(item.href)}
+                  className="text-[#1a1a1a] hover:text-[#0066cc] transition-colors font-medium text-sm"
+                  style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}
+                >
+                  {item.name}
+                </button>
+              );
+            })}
             <Button
-              variant="secondary"
+              variant="default"
               size="sm"
-              onClick={() => handleNavClick("#membership")}
+              className="bg-[#0066cc] hover:bg-[#0052a3] text-white"
+              style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}
             >
-              Join Us
+              Donate
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-white"
+            className="md:hidden text-[#1a1a1a]"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -101,22 +138,38 @@ export default function Navbar() {
             className="md:hidden pb-4"
           >
             <div className="flex flex-col space-y-4">
-              {navItems.map((item) => (
-                <button
-                  key={item.name}
-                  onClick={() => handleNavClick(item.href)}
-                  className="text-white/90 hover:text-secondary transition-colors text-left font-medium"
-                >
-                  {item.name}
-                </button>
-              ))}
+              {navItems.map((item) => {
+                if (item.href.startsWith("/")) {
+                  return (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className="text-[#1a1a1a] hover:text-[#0066cc] transition-colors text-left font-medium"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}
+                    >
+                      {item.name}
+                    </Link>
+                  );
+                }
+                return (
+                  <button
+                    key={item.name}
+                    onClick={() => handleNavClick(item.href)}
+                    className="text-[#1a1a1a] hover:text-[#0066cc] transition-colors text-left font-medium"
+                    style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}
+                  >
+                    {item.name}
+                  </button>
+                );
+              })}
               <Button
-                variant="secondary"
+                variant="default"
                 size="sm"
-                onClick={() => handleNavClick("#membership")}
-                className="w-full"
+                className="w-full bg-[#0066cc] text-white"
+                style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}
               >
-                Join Us
+                Donate
               </Button>
             </div>
           </motion.div>

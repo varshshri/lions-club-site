@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "netlify-build": "next build"
   },
   "dependencies": {
     "next": "^15.0.0",
@@ -28,7 +29,8 @@
     "postcss": "^8.4.33",
     "autoprefixer": "^10.4.17",
     "eslint": "^8.56.0",
-    "eslint-config-next": "^15.0.0"
+    "eslint-config-next": "^15.0.0",
+    "@netlify/plugin-nextjs": "^4.39.0"
   }
 }
 

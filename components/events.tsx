@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar, MapPin, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -12,6 +13,7 @@ const upcomingEvents = [
     time: "9:00 AM - 4:00 PM",
     location: "Community Center",
     description: "Free health check-ups, blood pressure screening, and health awareness sessions.",
+    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=300&fit=crop",
   },
   {
     title: "Blood Donation Drive",
@@ -19,6 +21,7 @@ const upcomingEvents = [
     time: "10:00 AM - 3:00 PM",
     location: "City Hospital",
     description: "Join us in saving lives. All donors will receive a certificate and refreshments.",
+    image: "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=400&h=300&fit=crop",
   },
   {
     title: "Tree Planting Initiative",
@@ -26,16 +29,17 @@ const upcomingEvents = [
     time: "8:00 AM - 12:00 PM",
     location: "City Park",
     description: "Help us plant 500 trees to make our city greener. All volunteers welcome!",
+    image: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=400&h=300&fit=crop",
   },
 ];
 
 const pastEvents = [
-  { id: 1, title: "Eye Donation Awareness", image: "/api/placeholder/400/300" },
-  { id: 2, title: "Food Distribution Drive", image: "/api/placeholder/400/300" },
-  { id: 3, title: "Senior Care Program", image: "/api/placeholder/400/300" },
-  { id: 4, title: "School Supplies Donation", image: "/api/placeholder/400/300" },
-  { id: 5, title: "Clean Beach Campaign", image: "/api/placeholder/400/300" },
-  { id: 6, title: "Medical Camp", image: "/api/placeholder/400/300" },
+  { id: 1, title: "Eye Donation Awareness", image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop" },
+  { id: 2, title: "Food Distribution Drive", image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&h=300&fit=crop" },
+  { id: 3, title: "Senior Care Program", image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop" },
+  { id: 4, title: "School Supplies Donation", image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=300&fit=crop" },
+  { id: 5, title: "Clean Beach Campaign", image: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=400&h=300&fit=crop" },
+  { id: 6, title: "Medical Camp", image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=300&fit=crop" },
 ];
 
 export default function Events() {
@@ -72,7 +76,16 @@ export default function Events() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
-                <Card className="h-full hover:shadow-lg transition-shadow border-2 hover:border-secondary">
+                <Card className="h-full hover:shadow-lg transition-shadow border-2 hover:border-secondary overflow-hidden">
+                  <div className="relative h-48 w-full">
+                    <Image
+                      src={event.image}
+                      alt={event.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  </div>
                   <CardHeader>
                     <CardTitle className="text-primary text-xl">
                       {event.title}
@@ -124,8 +137,15 @@ export default function Events() {
                   className="flex-shrink-0"
                 >
                   <Card className="w-80 h-64 overflow-hidden hover:shadow-xl transition-shadow border-2 hover:border-secondary">
-                    <div className="w-full h-48 bg-gradient-to-br from-primary to-secondary relative">
-                      <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="relative w-full h-48">
+                      <Image
+                        src={event.image}
+                        alt={event.title}
+                        fill
+                        className="object-cover"
+                        sizes="320px"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-4">
                         <span className="text-white font-semibold text-lg">
                           {event.title}
                         </span>

@@ -2,19 +2,20 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const galleryImages = [
-  { id: 1, title: "Health Camp", src: "/api/placeholder/600/400" },
-  { id: 2, title: "Blood Donation", src: "/api/placeholder/600/400" },
-  { id: 3, title: "Community Service", src: "/api/placeholder/600/400" },
-  { id: 4, title: "Tree Planting", src: "/api/placeholder/600/400" },
-  { id: 5, title: "Food Distribution", src: "/api/placeholder/600/400" },
-  { id: 6, title: "Eye Donation Awareness", src: "/api/placeholder/600/400" },
-  { id: 7, title: "School Program", src: "/api/placeholder/600/400" },
-  { id: 8, title: "Senior Care", src: "/api/placeholder/600/400" },
-  { id: 9, title: "Environmental Cleanup", src: "/api/placeholder/600/400" },
+  { id: 1, title: "Health Camp", src: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&h=400&fit=crop" },
+  { id: 2, title: "Blood Donation", src: "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=600&h=400&fit=crop" },
+  { id: 3, title: "Community Service", src: "https://images.unsplash.com/photo-1559027615-cd4628902d7a?w=600&h=400&fit=crop" },
+  { id: 4, title: "Tree Planting", src: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600&h=400&fit=crop" },
+  { id: 5, title: "Food Distribution", src: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&h=400&fit=crop" },
+  { id: 6, title: "Eye Donation Awareness", src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop" },
+  { id: 7, title: "School Program", src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&h=400&fit=crop" },
+  { id: 8, title: "Senior Care", src: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=400&fit=crop" },
+  { id: 9, title: "Environmental Cleanup", src: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=600&h=400&fit=crop" },
 ];
 
 export default function Gallery() {
@@ -27,6 +28,8 @@ export default function Gallery() {
   const closeLightbox = () => {
     setSelectedImage(null);
   };
+
+  const selectedImageData = galleryImages.find((img) => img.id === selectedImage);
 
   return (
     <section id="gallery" className="py-20 bg-white">
@@ -59,14 +62,23 @@ export default function Gallery() {
               className="relative overflow-hidden rounded-lg cursor-pointer group"
               onClick={() => openLightbox(image.id)}
             >
-              <div className="aspect-video bg-gradient-to-br from-primary to-secondary relative">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-white font-semibold text-lg">
-                    {image.title}
-                  </span>
+              <div className="aspect-video relative">
+                <Image
+                  src={image.src}
+                  alt={image.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end">
+                  <div className="p-4 w-full">
+                    <span className="text-white font-semibold text-lg">
+                      {image.title}
+                    </span>
+                  </div>
                 </div>
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
-                  <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity font-semibold">
+                  <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity font-semibold text-lg">
                     Click to view
                   </span>
                 </div>
@@ -77,7 +89,7 @@ export default function Gallery() {
 
         {/* Lightbox */}
         <AnimatePresence>
-          {selectedImage !== null && (
+          {selectedImage !== null && selectedImageData && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -94,14 +106,23 @@ export default function Gallery() {
               >
                 <button
                   onClick={closeLightbox}
-                  className="absolute top-4 right-4 z-10 text-white hover:text-secondary transition-colors"
+                  className="absolute top-4 right-4 z-10 text-white hover:text-secondary transition-colors bg-black/50 rounded-full p-2"
                 >
-                  <X className="w-8 h-8" />
+                  <X className="w-6 h-6" />
                 </button>
-                <div className="aspect-video bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center">
-                  <span className="text-white font-semibold text-2xl">
-                    {galleryImages.find((img) => img.id === selectedImage)?.title}
-                  </span>
+                <div className="relative aspect-video rounded-lg overflow-hidden">
+                  <Image
+                    src={selectedImageData.src}
+                    alt={selectedImageData.title}
+                    fill
+                    className="object-contain"
+                    sizes="90vw"
+                  />
+                </div>
+                <div className="mt-4 text-center">
+                  <h3 className="text-white text-2xl font-semibold">
+                    {selectedImageData.title}
+                  </h3>
                 </div>
               </motion.div>
             </motion.div>
